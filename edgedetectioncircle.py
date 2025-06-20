@@ -8,6 +8,15 @@ def make_synthetic_image():
             img[i][j] = 255.0
     return img
 
+def make_circle_image():
+    img = [[0.0 for _ in range(100)] for _ in range(100)]
+    cx, cy, r = 50, 50, 20                       # centre (50,50), radius 20
+    for i in range(100):
+        for j in range(100):
+            if (i - cy) ** 2 + (j - cx) ** 2 <= r ** 2:
+                img[i][j] = 255.0               # inside circle → white
+    return img
+
 # ------------------------------------------------------------
 # 2) Plain 2-D convolution (no numpy helpers)
 # ------------------------------------------------------------
@@ -49,7 +58,7 @@ sobel_y = [
 # ------------------------------------------------------------
 # 4) Run everything
 # ------------------------------------------------------------
-img      = make_synthetic_image()
+img      = make_circle_image()
 grad_x   = convolve2d_plain(img, sobel_x)   # vertical edges
 grad_y   = convolve2d_plain(img, sobel_y)   # horizontal edges
 
